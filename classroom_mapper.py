@@ -473,8 +473,10 @@ def run_pipeline(left_path, right_path,
 if __name__ == "__main__":
     p = argparse.ArgumentParser(
         description="Classroom furniture mapper — baseline auto-estimated, no measuring needed")
-    p.add_argument("left",  nargs="?", default=None, help="First photo path")
-    p.add_argument("right", nargs="?", default=None, help="Second photo path")
+    p.add_argument("left",  nargs="?", default="calibration_images/backup2.jpg",
+                help="First photo path")
+    p.add_argument("right", nargs="?", default="calibration_images/backup1.jpg",
+                help="Second photo path")
     p.add_argument("--fov",        type=float, default=70.0,
                    help="Phone camera horizontal FOV in degrees (default: 70)")
     p.add_argument("--baseline",   type=float, default=None,
@@ -488,7 +490,7 @@ if __name__ == "__main__":
 
     CAMERA_HEIGHT_M = args.cam_height   # apply override
 
-    if args.left is None or args.right is None:
+    if not args.left or not args.right:
         print("\n[DEMO MODE] — no images provided, running self-test.\n")
         print("Real usage:")
         print("  python classroom_mapper.py photo1.jpg photo2.jpg")
